@@ -2,16 +2,46 @@
 
 <head>
 	<title>jrroberto.github.io/investing</title>
+	<style>
+		/* 
+			COOL AND RESPONSIVE BUTTONS WITH A FEW LINES OF CSS
+			https://fdossena.com/?p=html5cool/buttons/i.frag 
+		*/
+		a.button7{
+		 display:inline-block;
+		 padding:0.2em 0.3em;
+		 margin:0 0.3em 0.3em 0;
+		 border-radius:0.2em;
+		 box-sizing: border-box;
+		 text-decoration:none;
+		 font-family:'Roboto',sans-serif;
+		 font-weight:400;
+		 color:#FFFFFF;
+		 background-color:#3369ff;
+		 box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+		 text-align:center;
+		 position:relative;
+		}
+		a.button7:active{
+		 box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+		}
+		@media all and (max-width:30em){
+		 a.button7{
+		  display:block;
+		  margin:0.4em auto;
+		 }
+		}
+	</style>
 </head>
 
 <body>
-	<h1>🗠Investing</h1>
+	<h1>ðŸ— Investing</h1>
 	<a href="https://www.marketwatch.com/">MarketWatch</a>
 	<a href="https://www.investagrams.com/">Investagrams</a>
 	
-	<div style="background-color: PaleGoldenrod;">
+	<div id="col_stock_picks">
 		<h2>COL Stock Picks</h2>
-		<pre>
+		<pre id="current_col_stock_picks">
 Rating 	Stock   FV      Buy Below
 BUY     ALI     49.33    42.00
 BUY     MBT     92.50    80.00
@@ -21,10 +51,24 @@ HOLD    DNL      9.80     8.50
 HOLD    EW      17.00    13.60
 as of 2019-10-21
 		</pre>
+		<script>
+			function showOnlyCurrentPicks() {
+				document.body.innerHTML = 
+					'<a href="javascript:location.reload();" class="button7">X</a>' +
+					"<pre>" + document.getElementById("current_col_stock_picks").innerHTML + "</pre>" 
+						 ;
+			}	
+		</script>
+		<a href="javascript:showOnlyCurrentPicks();" class="button7">Show only current picks</a>
+		<pre id="previous_col_stock_picks" style="color: MintCream ; background-color: SlateGrey; width: 500">
+Previous Stock Picks
+		</pre>
 	</div>
 	
+	
+	
 	<div style="background-color: PaleGoldenrod; font-family: Courier">
-	&nbsp;&nbsp; 💻 <a href="https://jrroberto.github.io/index.html">jrroberto.github.io</a>/investing | 2019 | version 0.1.1
+	&nbsp;&nbsp; ðŸ’» <a href="https://jrroberto.github.io/index.html">jrroberto.github.io</a>/investing | 2019 | version 0.1.1
 	</div>
 </body>
 

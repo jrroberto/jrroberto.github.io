@@ -1,0 +1,63 @@
+<div style="display: none;">
+<stockpick_editions>
+
+<stockpicks asof="2019-10-21">
+Rating 	Stock   FV      Buy Below
+BUY     ALI     49.33    42.00
+BUY     MBT     92.50    80.00
+BUY     SECB   198.00   171.00
+BUY     AC    1077.00   936.00
+HOLD    DNL      9.80     8.50
+HOLD    EW      17.00    13.60
+</stockpicks>
+
+</stockpick_editions>
+</div>
+
+<pre id="stock_picks">
+</pre>
+
+<script>
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+
+var current_stock_pick_indicator = getUrlVars()["current"];
+
+// load the stock picks from xml format to javascript
+var stock_picks = {};
+for (let item of document.getElementsByTagName("stockpick_editions").item(0).getElementsByTagName("stockpicks")) {
+    stock_picks[item.attributes.asof.value] = item.innerHTML.trim()
+}
+// get the latest stock pick date
+latest_stock_pick_date = Object.keys(stock_picks).reduce(
+	function(total, currentValue) {
+		if(total >= currentValue)
+			return total
+		return currentValue
+	}
+	,0
+)
+
+// populate latest stock picks
+if(current_stock_pick_indicator == "true")
+	document.getElementById("stock_picks").innerHTML = stock_picks[latest_stock_pick_date] + "\nas of " + latest_stock_pick_date
+else {
+	// populate previous stock picks
+	for(
+		let dt of 
+		Object.keys(stock_picks).filter(
+			function(dt) {
+				return dt != latest_stock_pick_date
+			}
+		).sort().reverse()
+	) {
+		document.getElementById("stock_picks").innerHTML += stock_picks[dt] + "\nas of " + dt + "\n\n"
+	}
+}
+</script>
+
